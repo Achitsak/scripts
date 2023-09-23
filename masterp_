@@ -1,20 +1,15 @@
 local game_place = game.PlaceId
-local _G.game_load = 'Hello'
 if _G.LoadGame == "BF" or game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
   print("Games : BF")
-  _G.game_load = 'Bf'
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
 elseif _G.LoadGame == "KL" or game_place == 4520749081 or game_place == 6381829480 then
   print("Games : KL")
-  _G.game_load = 'Kl'
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
 elseif _G.LoadGame == "AA" or game_place == 8304191830 then
   print("Games : AA")
-  _G.game_load = 'Aa'
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
 else
   print("Games Is Not Support")
-  _G.game_load = 'Error'
 end
 --[[ Load Service ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
