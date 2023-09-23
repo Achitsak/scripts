@@ -16,3 +16,5 @@ else
   print("Games Is Not Support")
   game_load = 'Error'
 end
+--[[ Load Service ]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
