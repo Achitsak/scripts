@@ -12,4 +12,5 @@ else
   print("Games Is Not Support")
 end
 --[[ Load Service ]]
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/admin_dashboard"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
