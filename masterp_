@@ -1,15 +1,16 @@
 local game_place = game.PlaceId
-if _G.LoadGame == "BF" or game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
-  print("Games : BF")
+if game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
+  print("Games : Blox Fruits")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
-elseif _G.LoadGame == "KL" or game_place == 4520749081 or game_place == 6381829480 then
-  print("Games : KL")
+elseif game_place == 4520749081 or game_place == 6381829480 or game_place == 15759515082 then
+  print("Games : King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
-elseif _G.LoadGame == "AA" or game_place == 8304191830 then
-  print("Games : AA")
+elseif game_place == 8304191830 then
+  print("Games : Not Update (AA)")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
 else
   print("Games Is Not Support")
+  warn("Games Is Not Support")
 end
 --[[ Load Service ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/admin_dashboard"))()
