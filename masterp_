@@ -1,8 +1,9 @@
 local game_place = game.PlaceId
+local KL = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
 if game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
   print("Games : Blox Fruits")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
-elseif game_place == 4520749081 or game_place == 6381829480 or game_place == 15759515082 then
+elseif KL then
   print("Games : King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
 elseif game_place == 8304191830 then
