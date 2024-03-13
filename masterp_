@@ -1,3 +1,6 @@
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players
+
 local game_place = game.PlaceId
 local KL = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
 if game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
