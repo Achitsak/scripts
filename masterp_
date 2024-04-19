@@ -11,7 +11,7 @@ function notify(...)
 end
 
 local game_place = game.PlaceId
-lcoal Blox_Fruits = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
+local Blox_Fruits = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
 local King_Legacy = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
 
 if Blox_Fruits then
