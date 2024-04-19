@@ -1,21 +1,30 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 
+function notify(...)
+      game.StarterGui:SetCore("SendNotification", {
+      Title = "Masterp Service";
+      Text = tostring(...);
+      Icon = "rbxassetid://480009377";
+      Duration = 5;
+    })
+end
+
 local game_place = game.PlaceId
-local KL = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
-if game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635 then
-  print("Games : Blox Fruits")
+lcoal Blox_Fruits = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
+local King_Legacy = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
+
+if Blox_Fruits then
+  notify("Games : Blox Fruits")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
-elseif KL then
-  print("Games : King Legacy")
+elseif King_Legacy then
+  notify("Games : King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
 elseif game_place == 8304191830 then
-  print("Games : Not Update (AA)")
+  notify("Games : Not Update (AA)")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
 else
-  print("Games Is Not Support")
-  warn("Games Is Not Support")
+  notify("Games Is Not Support")
 end
 --[[ Load Service ]]
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/admin_dashboard"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
