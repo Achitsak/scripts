@@ -145,7 +145,7 @@ local ListMelee = function()
     if meleecount == 7 then
         return "SGA + "
     end
-    return ' | 〔'..meleecount..'/7〕 | '
+    return ' 〔'..meleecount..'/7〕 | '
 end
 
 local ListMaterial = function()
@@ -327,3 +327,5 @@ print('--------------------------------------------------------------')
 -- _G.Key = 'masterp'
 -- _G.Discord = '483969305940328448'
 -- getgenv().Loaders = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/masterp_"))()
+
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/refs/heads/main/Log.txt"))()
