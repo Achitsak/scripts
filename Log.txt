@@ -312,20 +312,12 @@ end
 NOTIFICATION("message: 1")
 task.spawn(function()
     while true do 
-        getgenv().Alias(Level()..ListMelee()..AliasInventory()..' | '..ListMaterial())
-        getgenv().Description(LeverCheck()..Awaken_Fruit_Mastery()..'• '..MoneyANDFragments()..RaceANDAwaken()..'   \n------( Sword )------ \n'..SwordMastery()..'\n------( Fruits 1 M )------ \n'..Fruits1M())
+        pcall(function()
+            getgenv().Alias(Level()..ListMelee()..AliasInventory()..' | '..ListMaterial())
+            getgenv().Description(LeverCheck()..Awaken_Fruit_Mastery()..'• '..MoneyANDFragments()..RaceANDAwaken()..'   \n------( Sword )------ \n'..SwordMastery()..'\n------( Fruits 1 M )------ \n'..Fruits1M())
+        ned)
     task.wait(5)
     end
 end)
 NOTIFICATION("message: 2")
 print('--------------------------------------------------------------')
-
-
--- loadstring(game:HttpGet("https://pastebin.com/raw/5hURdhfn"))()
-
--- repeat task.wait(2) until game:IsLoaded()
--- _G.Key = 'masterp'
--- _G.Discord = '483969305940328448'
--- getgenv().Loaders = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/masterp_"))()
-
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/refs/heads/main/Log.txt"))()
