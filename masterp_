@@ -1,6 +1,12 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 
+print('Execute 9x9e1')
+local PlaceId = game.PlaceId
+local Bloxfruits_1 = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
+local KingLegacy_2 = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
+local Fisch_3 = (game_place == 16732694052)
+
 function notify(...)
       game.StarterGui:SetCore("SendNotification", {
       Title = "Masterp Service";
@@ -10,25 +16,24 @@ function notify(...)
     })
 end
 
-local game_place = game.PlaceId
-local Blox_Fruits = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
-local King_Legacy = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
-local Fisch = (game_place == 16732694052)
+if not _G.Key or not _G.Discord then
+    while true do
+        notify('whitelist Error!')
+        wait(5) 
+    end
+end
 
-if Blox_Fruits then
+if Bloxfruits_1 then
   notify("Games : Blox Fruits")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
-elseif King_Legacy then
+elseif KingLegacy_2 then
   notify("Games : King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
-elseif Fisch then
-      notify("Games : Fich")
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
-elseif game_place == 8304191830 then
-  notify("Games : Not Update (AA)")
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
+elseif Fisch_3 then
+    notify("Games : Fich")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
 else
-  notify("Games Is Not Support")
+  notify("Not Support This Game!")
 end
 --[[ Load Service ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
