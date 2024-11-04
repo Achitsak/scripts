@@ -3,9 +3,10 @@ repeat task.wait() until game.Players
 
 print('Execute 9x9e1')
 local PlaceId = game.PlaceId
-local Bloxfruits_1 = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
-local KingLegacy_2 = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
-local Fisch_3 = (game_place == 16732694052)
+local Bloxfruits_1 = (PlaceId == 2753915549 or PlaceId == 4442272183 or PlaceId == 7449423635)
+local KingLegacy_2 = (PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 or PlaceId == 6596144663 or PlaceId == 15759515082)
+local Fisch_3 = (PlaceId == 16732694052)
+
 
 function notify(...)
       game.StarterGui:SetCore("SendNotification", {
