@@ -13,6 +13,7 @@ end
 local game_place = game.PlaceId
 local Blox_Fruits = (game_place == 2753915549 or game_place == 4442272183 or game_place == 7449423635)
 local King_Legacy = (game_place == 4520749081 or game_place == 6381829480 or game_place == 5931540094 or game_place == 6596144663 or game_place == 15759515082)
+local Fich = (game_place == 16732694052)
 
 if Blox_Fruits then
   notify("Games : Blox Fruits")
@@ -20,6 +21,9 @@ if Blox_Fruits then
 elseif King_Legacy then
   notify("Games : King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
+elseif Fich then
+      notify("Games : Fich")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
 elseif game_place == 8304191830 then
   notify("Games : Not Update (AA)")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
