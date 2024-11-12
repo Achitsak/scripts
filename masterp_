@@ -6,6 +6,7 @@ local PlaceId = game.PlaceId
 local Bloxfruits_1 = (PlaceId == 2753915549 or PlaceId == 4442272183 or PlaceId == 7449423635)
 local KingLegacy_2 = (PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 or PlaceId == 6596144663 or PlaceId == 15759515082)
 local Fisch_3 = (PlaceId == 16732694052)
+local Anime_Reborn = (PlaceId == 17046374415)
 
 
 function notify(...)
@@ -32,6 +33,9 @@ elseif KingLegacy_2 then
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
 elseif Fisch_3 then
     notify("Games : Fich")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
+elseif Anime_Reborn then
+    notify("Games : Anime_Reborn")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
 else
   notify("Not Support This Game!")
