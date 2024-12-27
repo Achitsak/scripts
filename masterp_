@@ -1,14 +1,19 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 
+local Notification = loadstring(game:HttpGet("https://pastebin.com/raw/QsFCbdY0"))()
 print('Execute 9x9e1')
+
+Notification:Create("Checking...", "Masterp Services Is Startup", 2)
+
+task.wait(3)
 local PlaceId = game.PlaceId
 local CreatorId = game.CreatorId
 local Bloxfruits_1 = (PlaceId == 2753915549 or PlaceId == 4442272183 or PlaceId == 7449423635)
 local KingLegacy_2 = (PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 or PlaceId == 6596144663 or PlaceId == 15759515082)
 local Fisch_3 = (PlaceId == 16732694052)
 local Anime_Reborn = (CreatorId == 33820338)
-
+local AA = (CreatorId == 10611639)
 
 function notify(...)
       game.StarterGui:SetCore("SendNotification", {
@@ -18,28 +23,42 @@ function notify(...)
       Duration = 5;
     })
 end
-
+Notification:Create("Whitelist...", "Auth Checking", 2)
+task.wait(2.5)
 if not _G.Key or not _G.Discord then
     while true do
+        Notification:Create("Your Are Not Whitelist!", "Pls Check Your Keys ❌",4)
         notify('whitelist Error!')
-        wait(5) 
+        wait(5)
     end
+else
+    Notification:Create("Whitelist!", "Startup ✅",3)
 end
 
+task.wait(4)
 if Bloxfruits_1 then
-  notify("Games : Blox Fruits")
+  notify("Blox Fruits")
+  Notification:Create("Blox Fruits!", "Executor Success!",3)
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_bf"))()
 elseif KingLegacy_2 then
-  notify("Games : King Legacy")
+  notify("King Legacy")
   loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_kl"))()
+  Notification:Create("King Legacy!", "Executor Success!",3)
 elseif Fisch_3 then
-    notify("Games : Fich")
+    notify("Fich")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
+    Notification:Create("Fich!", "Executor Success!",3)
 elseif Anime_Reborn then
-    notify("Games : Anime_Reborn")
+    notify("Anime_Reborn")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_fs"))()
+    Notification:Create("Anime_Reborn!", "Executor Success!",3)
+elseif AA then
+    notify("Anime-Adventures")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/mrp_project/main/description_aa"))()
+    Notification:Create("Anime-Adventures!", "Executor Success!",3)
 else
-  notify("Not Support This Game!")
+    Notification:Create("Not Support This Games", "Error!",10)
+    notify("Not Support This Game!")
 end
 --[[ Load Service ]]
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
