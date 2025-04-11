@@ -1,8 +1,8 @@
+-- notify.lua
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 
--- Advanced Notification System
 local NotificationService = {}
 NotificationService.__index = NotificationService
 
@@ -36,7 +36,7 @@ function NotificationService.new(config)
     container.Size = UDim2.new(0, self.Config.Width, 0, 0)
     container.BackgroundTransparency = 1
     container.ClipsDescendants = true
-    container.AutomaticSize = Enum.AutomaticSize.Y  -- << เปิด AutoSize แนว Y
+    container.AutomaticSize = Enum.AutomaticSize.Y
 
     self.Container = container
     self.ActiveNotifications = {}
@@ -49,21 +49,18 @@ function NotificationService:CreateNotification(params)
     local dur = params.duration or 3
     local scheme = self.Colors[t] or self.Colors.DEFAULT
 
-    -- ถ้าเต็ม ก็ลบตัวแรก
     if #self.ActiveNotifications >= self.Config.MaxNotifications then
-        table.remove(self.ActiveNotifications, 1):Destroy()
+        table.remove(self.ActiveNotifications,1):Destroy()
     end
 
-    -- สร้าง Frame
     local frame = Instance.new("Frame", self.Container)
-    frame.AnchorPoint = Vector2.new(1, 0)  -- << ปรับให้เลื่อนจากขวาเข้ามา
+    frame.AnchorPoint = Vector2.new(1, 0)
     frame.Size = UDim2.new(1, 0, 0, self.Config.NotificationHeight)
-    frame.Position = UDim2.new(1, 0, 0, (#self.ActiveNotifications)*(self.Config.NotificationHeight + self.Config.Spacing))
+    frame.Position = UDim2.new(1, 0, 0, #self.ActiveNotifications*(self.Config.NotificationHeight+self.Config.Spacing))
     frame.BackgroundColor3 = scheme.Background
     frame.BackgroundTransparency = 0.2
     Instance.new("UICorner", frame).CornerRadius = UDim.new(0,12)
 
-    -- Progress Bar
     local progBg = Instance.new("Frame", frame)
     progBg.Size = UDim2.new(1,0,0,5)
     progBg.Position = UDim2.new(0,0,1,-5)
@@ -74,7 +71,6 @@ function NotificationService:CreateNotification(params)
     prog.BackgroundColor3 = scheme.ProgressBar
     Instance.new("UICorner", prog).CornerRadius = UDim.new(1,0)
 
-    -- Label
     local lbl = Instance.new("TextLabel", frame)
     lbl.Text = text
     lbl.Font = Enum.Font.GothamBold
@@ -87,7 +83,6 @@ function NotificationService:CreateNotification(params)
 
     table.insert(self.ActiveNotifications, frame)
 
-    -- Animate Progress
     local start = tick()
     local conn
     conn = RunService.Heartbeat:Connect(function()
@@ -95,18 +90,15 @@ function NotificationService:CreateNotification(params)
         prog.Size = UDim2.new(1-p,0,1,0)
         if p>=1 then
             conn:Disconnect()
-            -- Tween Out
             TweenService:Create(frame, TweenInfo.new(0.4,Enum.EasingStyle.Back,Enum.EasingDirection.In),
                 {Position=UDim2.new(1,0,0,frame.Position.Y.Offset)}
             ):Play()
-            -- ลบจาก list
             for i,f in ipairs(self.ActiveNotifications) do
                 if f==frame then table.remove(self.ActiveNotifications,i); break end
             end
         end
     end)
 
-    -- Tween In
     TweenService:Create(frame, TweenInfo.new(0.4,Enum.EasingStyle.Back,Enum.EasingDirection.Out),
         {Position=UDim2.new(0,0,0,frame.Position.Y.Offset)}
     ):Play()
