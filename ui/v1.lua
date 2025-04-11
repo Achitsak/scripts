@@ -207,4 +207,8 @@ local function notify(params)
 end
 
 
-return NotificationService
+return {
+    NotificationService = NotificationService,
+    NotifySystem = NotifySystem,
+    notify = notify
+}
