@@ -206,6 +206,5 @@ return function(config)
         return NotifySystem:CreateNotification(params)
     end
 
-    -- Return Notify Function and NotificationSystem
     return notify, NotifySystem
 end
