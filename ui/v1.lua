@@ -1,198 +1,222 @@
--- Roblox Notification System
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 
-local NotificationUI = {}
+-- Advanced Notification System
+local NotificationService = {}
+NotificationService.__index = NotificationService
 
--- Configuration
-NotificationUI.Config = {
-    MaxNotifications = 5,
-    NotificationLifetime = 5,
-    Width = 250,
-    Height = 60,
-    Padding = 10,
-    ScreenPadding = 20,
-    Offset = UDim2.new(0, 20, 0, 20)
-}
-
--- Create Notification Container
-function NotificationUI:CreateContainer()
-    local player = Players.LocalPlayer
-    local playerGui = player:WaitForChild("PlayerGui")
-    
-    -- Check if container exists
-    local existingContainer = playerGui:FindFirstChild("NotificationContainer")
-    if existingContainer then
-        return existingContainer
-    end
-    
-    -- Create container
-    local container = Instance.new("ScreenGui")
-    container.Name = "NotificationContainer"
-    container.ResetOnSpawn = false
-    container.Parent = playerGui
-    
-    return container
-end
-
--- Notification Color Palette
-local NotificationColors = {
-    Default = {
+-- Comprehensive Color Palette
+NotificationService.Colors = {
+    DEFAULT = {
         Background = Color3.fromRGB(50, 50, 50),
-        Text = Color3.fromRGB(255, 255, 255)
+        Text = Color3.fromRGB(255, 255, 255),
+        Accent = Color3.fromRGB(100, 100, 100)
     },
-    Success = {
-        Background = Color3.fromRGB(76, 175, 80),
-        Text = Color3.fromRGB(255, 255, 255)
+    SUCCESS = {
+        Background = Color3.fromRGB(0, 170, 0),
+        Text = Color3.fromRGB(255, 255, 255),
+        Accent = Color3.fromRGB(50, 220, 50)
     },
-    Warning = {
-        Background = Color3.fromRGB(255, 152, 0),
-        Text = Color3.fromRGB(0, 0, 0)
+    WARNING = {
+        Background = Color3.fromRGB(255, 128, 0),
+        Text = Color3.fromRGB(255, 255, 255),
+        Accent = Color3.fromRGB(255, 170, 50)
     },
-    Error = {
-        Background = Color3.fromRGB(244, 67, 54),
-        Text = Color3.fromRGB(255, 255, 255)
+    ERROR = {
+        Background = Color3.fromRGB(255, 50, 50),
+        Text = Color3.fromRGB(255, 255, 255),
+        Accent = Color3.fromRGB(255, 100, 100)
     },
-    Info = {
-        Background = Color3.fromRGB(33, 150, 243),
-        Text = Color3.fromRGB(255, 255, 255)
+    INFO = {
+        Background = Color3.fromRGB(40, 120, 255),
+        Text = Color3.fromRGB(255, 255, 255),
+        Accent = Color3.fromRGB(100, 160, 255)
     }
 }
 
--- Create Notification
-function NotificationUI:CreateNotification(container, message, notificationType)
-    -- Get color scheme
-    local colors = NotificationColors[notificationType] or NotificationColors.Default
+-- Sound Effects
+NotificationService.Sounds = {
+    DEFAULT = "rbxassetid://6958054266",
+    SUCCESS = "rbxassetid://6958054482",
+    WARNING = "rbxassetid://6958054103",
+    ERROR = "rbxassetid://6958053963",
+    INFO = "rbxassetid://6958054266"
+}
+
+-- Create Notification UI
+function NotificationService.new()
+    local self = setmetatable({}, NotificationService)
     
-    -- Create notification frame
-    local notification = Instance.new("Frame")
-    notification.Size = UDim2.new(0, self.Config.Width, 0, self.Config.Height)
-    notification.BackgroundColor3 = colors.Background
-    notification.BackgroundTransparency = 0.2
-    notification.BorderSizePixel = 0
-    notification.Position = UDim2.new(1, -self.Config.Width - self.Config.ScreenPadding, 1, self.Config.ScreenPadding)
+    -- Create ScreenGui
+    local player = Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
     
-    -- Rounded corners
-    local corner = Instance.new("UICorner")
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "AdvancedNotify"
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = playerGui
+    
+    local container = Instance.new("Frame")
+    container.Name = "NotificationContainer"
+    container.AnchorPoint = Vector2.new(1, 0)
+    container.Position = UDim2.new(1, -20, 0, 20)
+    container.Size = UDim2.new(0, 300, 0, 0)
+    container.BackgroundTransparency = 1
+    container.Parent = screenGui
+    
+    self.Container = container
+    self.ActiveNotifications = {}
+    
+    return self
+end
+
+-- Play Sound Effect
+function NotificationService:PlaySound(notifyType)
+    local sound = Instance.new("Sound")
+    sound.SoundId = self.Sounds[string.upper(notifyType)] or self.Sounds.DEFAULT
+    sound.Volume = 0.5
+    sound.Parent = workspace
+    sound:Play()
+    game.Debris:AddItem(sound, 2)
+end
+
+-- Create Single Notification
+function NotificationService:CreateNotification(text, notifyType, duration)
+    notifyType = string.upper(notifyType or "DEFAULT")
+    duration = duration or 3
+    
+    local colorScheme = self.Colors[notifyType] or self.Colors.DEFAULT
+    
+    -- Create Notification Frame
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 0, 50)
+    frame.BackgroundColor3 = colorScheme.Background
+    frame.BackgroundTransparency = 0.2
+    frame.BorderSizePixel = 0
+    
+    -- Rounded Corners
+    local corner = Instance.new("UICorner", frame)
     corner.CornerRadius = UDim.new(0, 10)
-    corner.Parent = notification
     
-    -- Message label
-    local messageLabel = Instance.new("TextLabel")
-    messageLabel.Size = UDim2.new(1, -40, 1, -20)
-    messageLabel.Position = UDim2.new(0, 20, 0, 10)
-    messageLabel.BackgroundTransparency = 1
-    messageLabel.Font = Enum.Font.GothamSemibold
-    messageLabel.TextColor3 = colors.Text
-    messageLabel.TextScaled = true
-    messageLabel.TextXAlignment = Enum.TextXAlignment.Left
-    messageLabel.Text = message
-    messageLabel.Parent = notification
-    
-    -- Close button
-    local closeButton = Instance.new("TextButton")
-    closeButton.Size = UDim2.new(0, 30, 0, 30)
-    closeButton.Position = UDim2.new(1, -35, 0, 15)
-    closeButton.BackgroundTransparency = 1
-    closeButton.Text = "✕"
-    closeButton.TextColor3 = colors.Text
-    closeButton.TextScaled = true
-    closeButton.Parent = notification
-    
-    -- Adjust existing notifications
-    local existingNotifications = container:GetChildren()
-    for i, existingNotif in ipairs(existingNotifications) do
-        if existingNotif:IsA("Frame") then
-            local targetY = existingNotif.Position.Y.Offset - (self.Config.Height + self.Config.Padding)
-            
-            local tweenInfo = TweenInfo.new(
-                0.3, 
-                Enum.EasingStyle.Quad, 
-                Enum.EasingDirection.Out
-            )
-            
-            local tween = TweenService:Create(existingNotif, tweenInfo, {
-                Position = UDim2.new(1, -self.Config.Width - self.Config.ScreenPadding, 0, targetY)
-            })
-            tween:Play()
-        end
-    end
-    
-    -- Remove if too many notifications
-    if #existingNotifications >= self.Config.MaxNotifications then
-        existingNotifications[1]:Destroy()
-    end
-    
-    -- Animate entrance
-    notification.Parent = container
-    
-    local tweenInfo = TweenInfo.new(
-        0.3, 
-        Enum.EasingStyle.Quad, 
-        Enum.EasingDirection.Out
-    )
-    
-    local tween = TweenService:Create(notification, tweenInfo, {
-        Position = UDim2.new(1, -self.Config.Width - self.Config.ScreenPadding, 0, self.Config.ScreenPadding)
+    -- Subtle Gradient
+    local gradient = Instance.new("UIGradient", frame)
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.new(1,1,1)),
+        ColorSequenceKeypoint.new(1, colorScheme.Background)
     })
-    tween:Play()
+    gradient.Transparency = NumberSequence.new({
+        NumberSequenceKeypoint.new(0, 0.7),
+        NumberSequenceKeypoint.new(1, 1)
+    })
     
-    -- Close button functionality
-    closeButton.MouseButton1Click:Connect(function()
-        local closeTween = TweenService:Create(notification, tweenInfo, {
-            Position = UDim2.new(1, self.Config.Width, 0, notification.Position.Y.Offset)
-        })
-        closeTween:Play()
+    -- Border Accent
+    local stroke = Instance.new("UIStroke", frame)
+    stroke.Color = colorScheme.Accent
+    stroke.Thickness = 1.5
+    stroke.Transparency = 0.5
+    
+    -- Text Label
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Text = text
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.TextColor3 = colorScheme.Text
+    textLabel.TextSize = 16
+    textLabel.BackgroundTransparency = 1
+    textLabel.Size = UDim2.new(1, -20, 1, 0)
+    textLabel.Position = UDim2.new(0, 10, 0, 0)
+    textLabel.TextXAlignment = Enum.TextXAlignment.Left
+    textLabel.Parent = frame
+    
+    -- Progress Bar
+    local progressBar = Instance.new("Frame")
+    progressBar.Size = UDim2.new(1, 0, 0, 3)
+    progressBar.Position = UDim2.new(0, 0, 1, -3)
+    progressBar.BackgroundColor3 = colorScheme.Accent
+    progressBar.BorderSizePixel = 0
+    progressBar.Parent = frame
+    
+    -- Positioning
+    local yOffset = #self.ActiveNotifications * 60
+    frame.Position = UDim2.new(1, 0, 0, yOffset)
+    frame.Parent = self.Container
+    
+    -- Play Sound
+    self:PlaySound(notifyType)
+    
+    -- Tween In
+    local tweenIn = TweenService:Create(frame, 
+        TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+        {Position = UDim2.new(0, 0, 0, yOffset)}
+    )
+    tweenIn:Play()
+    
+    -- Progress Bar Animation
+    local progressTween = TweenService:Create(progressBar, 
+        TweenInfo.new(duration, Enum.EasingStyle.Linear),
+        {Size = UDim2.new(0, 0, 0, 3)}
+    )
+    progressTween:Play()
+    
+    -- Store Active Notification
+    table.insert(self.ActiveNotifications, frame)
+    
+    -- Auto Remove
+    task.delay(duration, function()
+        -- Remove from active notifications
+        for i, notif in ipairs(self.ActiveNotifications) do
+            if notif == frame then
+                table.remove(self.ActiveNotifications, i)
+                break
+            end
+        end
         
-        closeTween.Completed:Connect(function()
-            notification:Destroy()
+        -- Tween Out
+        local tweenOut = TweenService:Create(frame, 
+            TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+            {Position = UDim2.new(1, 0, 0, frame.Position.Y.Offset)}
+        )
+        tweenOut:Play()
+        
+        -- Reposition Remaining Notifications
+        tweenOut.Completed:Connect(function()
+            for i, notification in ipairs(self.ActiveNotifications) do
+                local newPos = TweenService:Create(notification, 
+                    TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                    {Position = UDim2.new(0, 0, 0, (i-1) * 60)}
+                )
+                newPos:Play()
+            end
+            
+            -- Destroy Frame
+            frame:Destroy()
         end)
     end)
-    
-    -- Auto remove after lifetime
-    task.delay(self.Config.NotificationLifetime, function()
-        if notification and notification.Parent then
-            local closeTween = TweenService:Create(notification, tweenInfo, {
-                Position = UDim2.new(1, self.Config.Width, 0, notification.Position.Y.Offset)
-            })
-            closeTween:Play()
-            
-            closeTween.Completed:Connect(function()
-                notification:Destroy()
-            end)
-        end
-    end)
 end
 
--- Send notification
-function NotificationUI:Notify(message, notificationType)
-    local container = self:CreateContainer()
-    self:CreateNotification(container, message, notificationType)
+-- Global Notify Function
+local NotifySystem = NotificationService.new()
+local function notify(text, notifyType, duration)
+    NotifySystem:CreateNotification(text, notifyType, duration)
 end
 
--- Example usage
-local function setupNotificationDemo()
-    local player = Players.LocalPlayer
-    
-    -- Demonstration of different notification types
-    task.wait(2)
-    NotificationUI:Notify("Welcome to the game!", "Success")
-    
-    task.wait(2)
-    NotificationUI:Notify("New item acquired!", "Info")
-    
-    task.wait(2)
-    NotificationUI:Notify("Low health warning!", "Warning")
-    
-    task.wait(2)
-    NotificationUI:Notify("Connection error!", "Error")
-end
-
--- Run demo when player joins
-Players.PlayerAdded:Connect(function(player)
-    if player == Players.LocalPlayer then
-        setupNotificationDemo()
+-- Advanced Notification Methods
+function NotifySystem:Queue(notifications)
+    for _, notif in ipairs(notifications) do
+        task.wait(0.5)
+        self:CreateNotification(notif.text, notif.type, notif.duration)
     end
-end)
+end
 
-return NotificationUI
+function NotifySystem:Clear()
+    for _, notification in ipairs(self.ActiveNotifications) do
+        notification:Destroy()
+    end
+    self.ActiveNotifications = {}
+end
+
+-- Expose globally
+_G.notify = notify
+_G.NotificationSystem = NotifySystem
+
+return NotificationSystem
