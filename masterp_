@@ -1,23 +1,24 @@
 repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
+repeat task.wait() until game:GetService("Players").LocalPlayer
 
+local found = false
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v1.lua"))()
+
+local GameList = {
+    '4372130',
+    '5348890',
+    '7381705',
+    '10611639',
+    '33820338'
+}
+
 print('Execute 9x9e1')
 
 _G.notify({
     text = "Service Loaded Successfully", 
     type = "INFO", 
-    duration = 2
+    duration = 5
 })
-
-function notify(...)
-      game.StarterGui:SetCore("SendNotification", {
-      Title = "Masterp Service";
-      Text = tostring(...);
-      Icon = "rbxassetid://480009377";
-      Duration = 5;
-    })
-end
 
 task.wait(math.random(2,5))
 
@@ -40,7 +41,6 @@ if not _G.Key or not _G.Discord then
         wait(5)
     end
 else
-    Notification:Create("Auth Checking [Client]", "Startup ✅",4)
     _G.notify({
         text = "Auth Checking [Client]", 
         type = "WARNING", 
@@ -48,13 +48,28 @@ else
     })
 end
 
---[[ Load Service ]]
+for _, id in ipairs(GameList) do
+    if id == game.CreatorId then
+        found = true
+        break
+    end
+end
+
+if not found then
+    while true do
+        _G.notify({
+            text = "Game Not Supported", 
+            type = "ERROR", 
+            duration = 5
+        })
+    task.wait(4)
+    end
+end
 
 local url = ("https://raw.githubusercontent.com/Achitsak/scripts/main/library/description/%s.lua"):format(game.CreatorId)
 pcall(function() loadstring(game:HttpGet(url))() end)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
-
 
 _G.notify({
     text = "All Services Is Loaded 😎", 
