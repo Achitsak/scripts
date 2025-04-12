@@ -57,7 +57,7 @@ if not found then
             type = "ERROR", 
             duration = 5
         })
-    task.wait(4)
+    task.wait(7)
     end
 end
 
