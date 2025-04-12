@@ -1,6 +1,8 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game:GetService("Players").LocalPlayer
 
+task.wait(5)
+
 local found = false
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v1.lua"))()
 
