@@ -6,13 +6,7 @@ task.wait(5)
 local found = false
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v1.lua"))()
 
-local GameList = {
-    '4372130',
-    '5348890',
-    '7381705',
-    '10611639',
-    '33820338'
-}
+local GameList = {4372130, 5348890, 7381705, 10611639, 33820338}
 
 print(`Service Version 1.2.0`)
  
