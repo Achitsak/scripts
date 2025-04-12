@@ -10,7 +10,7 @@ local Executor = identifyexecutor and identifyexecutor() or "Unknown"
 local GameList = {4372130, 5348890, 7381705, 10611639, 33820338}
 
 print(`Service Version 1.2.1`)
-print(`Client: {game:getservice("Players").LocalPlayer.Name}`)
+print(`Client: {game.Players.LocalPlayer.Name}`)
 print(`Executor: {Executor}`)
 
 _G.notify({
