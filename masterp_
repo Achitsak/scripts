@@ -70,7 +70,7 @@ end
 local url = ("https://raw.githubusercontent.com/Achitsak/scripts/main/library/description/%s.lua"):format(game.CreatorId)
 pcall(function() loadstring(game:HttpGet(url))() end)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))()
+pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/backend"))() end)
 
 _G.notify({
     text = "All Services Is Loaded 😎", 
