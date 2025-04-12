@@ -14,8 +14,8 @@ local GameList = {
     '33820338'
 }
 
-print('Execute 9x9e1')
-
+print(`Service Version 1.2.0`)
+ 
 _G.notify({
     text = "Service Loaded Successfully", 
     type = "INFO", 
