@@ -35,16 +35,15 @@ if not _G.Key or not _G.Discord then
         _G.notify({
             text = "Your Are Not Whitelist", 
             type = "WARNING", 
-            duration = 2
+            duration = 3
         })
-        notify('whitelist Error!')
         wait(5)
     end
 else
     _G.notify({
         text = "Auth Checking [Client]", 
         type = "WARNING", 
-        duration = 2
+        duration = 3
     })
 end
 
