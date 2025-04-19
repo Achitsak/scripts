@@ -29,7 +29,7 @@ _G.notify({
 
 task.wait(math.random(2,5))
 
-if not _G.Key or not _G.Discord then
+if not _G.Key or not _G.Discord or not _G.Key == '' or not _G.Discord == '' then
     while true do
         _G.notify({
             text = "Your Are Not Whitelist", 
