@@ -11,7 +11,7 @@ local Backpack = Player:WaitForChild('Backpack')
 
 
 if not _G.Settings then
-    _G.Settings = {Pet = {}}
+    _G.Settings = {['Pet'] = {}}
 end
 
 function getcount()
