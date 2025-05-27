@@ -1,4 +1,4 @@
-repeat task.wait() until game:Loaded()
+repeat task.wait() until game:IsLoaded()
 
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
