@@ -25,6 +25,6 @@ aspect.AspectRatio = 1 -- ปรับเป็น 1:1 หรือเปลี�
 aspect.Parent = imageLabel
 
 -- ลบหลังจาก 2.5 วิ
-task.delay(3.5, function()
+task.delay(5, function()
 	screenGui:Destroy()
 end)
