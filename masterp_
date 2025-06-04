@@ -7,7 +7,7 @@ local found = false
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v1.lua"))()
 local Executor = identifyexecutor and identifyexecutor() or "Unknown"
 
-local GameList = {4372130, 5348890, 7381705, 10611639, 33820338, 17219742, 15009415, 35789249, 11867394}
+local GameList = {4372130, 5348890, 7381705, 10611639, 33820338, 17219742, 15009415, 35789249, 11867394, 34671275}
 
 print(`Service Version 1.2.1`)
 print(`Client: {game.Players.LocalPlayer.Name}`)
