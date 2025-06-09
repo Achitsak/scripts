@@ -25,7 +25,7 @@ _G.MasterpConfigLog = {
     }
 }
 
-task.wait(.4)
+task.wait(1)
 
 local Player = game:GetService("Players").LocalPlayer
 local HttpService = game:GetService("HttpService")
