@@ -25,7 +25,7 @@ _G.MasterpConfigLog = {
     }
 }
 
-task.wait(.5)
+task.wait(.4)
 
 local Player = game:GetService("Players").LocalPlayer
 local HttpService = game:GetService("HttpService")
@@ -131,7 +131,7 @@ task.spawn(function()
             warn(tostring(p))
         end
 
-        task.wait(1.1)
+        task.wait(1.5)
     end
 end)
 
