@@ -131,7 +131,7 @@ task.spawn(function()
             warn(tostring(p))
         end
 
-        task.wait(2)
+        task.wait(2.5)
     end
 end)
 
