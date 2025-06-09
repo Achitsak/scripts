@@ -21,7 +21,7 @@ _G.MasterpConfigLog = {
     },
     ['Seed'] = {'Carrot'},
     ['Settings'] = {
-        ['NgrokHttp'] = 'http://bd31-2403-6200-8814-30c9-3be6-8bce-8b3e-275e.ngrok-free.app'
+        ['NgrokHttp'] = 'https://services.zapzone.xyz'
     }
 }
 
