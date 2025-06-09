@@ -16,6 +16,7 @@ _G.MasterpConfigLog = {
         'Queen Bee', 
         'Disco Bee', 
         'Dragonfly', 
+        'Raccoon', 
         'Butterfly'
     },
     ['Seed'] = {'Carrot'},
