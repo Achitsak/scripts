@@ -21,7 +21,7 @@ _G.MasterpConfigLog = {
     },
     ['Seed'] = {'Carrot'},
     ['Settings'] = {
-        ['NgrokHttp'] = 'https://64cb-2403-6200-8814-30c9-7d4a-c610-cf15-644c.ngrok-free.app'
+        ['NgrokHttp'] = 'http://bd31-2403-6200-8814-30c9-3be6-8bce-8b3e-275e.ngrok-free.app'
     }
 }
 
