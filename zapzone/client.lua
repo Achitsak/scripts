@@ -50,7 +50,7 @@ task.spawn(function()
 		if not isDisconnected then
 			local success, result = pcall(function()
 				return HttpService:JSONDecode(Request({
-					Url = "https:api.zapzone.xyz/api/update",
+					Url = "https://api.zapzone.xyz/api/update",
 					Method = "POST",
 					Headers = { ["Content-Type"] = "application/json" },
 					Body = HttpService:JSONEncode(data)
