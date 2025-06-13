@@ -66,7 +66,7 @@ task.spawn(function()
 				end)
 			end
 		end
-		task.wait(math.random(3, 6))
+		task.wait(math.random(4, 7))
 	end
 end)
 
