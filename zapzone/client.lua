@@ -75,7 +75,7 @@ StarterGui:SetCore("SendNotification", {
     Title = "Masterp Services v2.4",
     Text = "Connected: " .. LocalPlayer.Name,
 })
-warn("Masterp Client Connected: " .. tostring(_G.MasterpConfigs.server_port))
+warn("Masterp Client Connected: ")
 
 -- Load remote scripts
 local success, err = pcall(function()
