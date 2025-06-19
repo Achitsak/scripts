@@ -43,18 +43,6 @@ promptOverlay.ChildAdded:Connect(function(child)
 	end
 end)
 
-promptOverlay.ChildAdded:Connect(function(x)
-	if x.Name == 'ErrorPrompt' then
-		isDisconnected = true
-	end
-end)
-
-game:GetService("Players").PlayerRemoving:Connect(function(playerLeaving)
-    if playerLeaving == LocalPlayer then
-        isDisconnected = true
-    end
-end)
-
 -- Update status to server
 task.spawn(function()
 	while true do
