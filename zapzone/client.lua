@@ -43,6 +43,12 @@ promptOverlay.ChildAdded:Connect(function(child)
 	end
 end)
 
+promptOverlay.ChildAdded:Connect(function(child)
+    if child.Name == 'ErrorPrompt' then
+        isDisconnected = true
+    end
+end)
+
 -- Update status to server
 task.spawn(function()
 	while true do
