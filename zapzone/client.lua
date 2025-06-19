@@ -30,15 +30,6 @@ LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 
-game.Players.PlayerAdded:Connect(function(player)
-    if player.Name == game.Players.LocalPlayer.Name then
-        player.OnDisconnect:Connect(function()
-            isDisconnected = true
-        end)
-    end
-end)
-
-
 local data = {
 	username = LocalPlayer.Name
 }
