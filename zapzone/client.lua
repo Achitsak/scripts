@@ -39,8 +39,13 @@ promptOverlay.ChildAdded:Connect(function(child)
 		local code = game:GetService("GuiService"):GetErrorCode().Value
 		if code > 0 then
 			isDisconnected = true
-			warn("Disconnected with error code:", code)
 		end
+	end
+end)
+
+promptOverlay.ChildAdded:Connect(function(x)
+	if x.Name == 'ErrorPrompt' then
+		isDisconnected = true
 	end
 end)
 
