@@ -35,12 +35,25 @@ local data = {
 }
 
 promptOverlay.ChildAdded:Connect(function(child)
-	if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") then
-		local code = game:GetService("GuiService"):GetErrorCode().Value
-		if code > 0 then
-			isDisconnected = true
-		end
+	if child.Name == "ErrorPrompt" then
+	 	pcall(function()
+                local code = game:GetService("GuiService"):GetErrorCode().Value
+                if code > 0 then
+                isDisconnected = true
+            end
+        end)
 	end
+end)
+
+game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v)
+    if v.Name == "ErrorPrompt" then 
+        pcall(function()
+            repeat wait(.5) until game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame:FindFirstChild("ErrorMessage")
+            if tonumber(game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame.ErrorMessage.Text:split("\n")[2]:match("%d+")) ~= 772 and tonumber(game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame.ErrorMessage.Text:split("\n")[2]:match("%d+")) ~= 773 then
+                game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+            end
+        end)
+    end
 end)
 
 promptOverlay.ChildAdded:Connect(function(child)
