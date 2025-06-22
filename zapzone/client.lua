@@ -87,6 +87,16 @@ local success, err = pcall(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v3.lua"))()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/Nexus/main/services/callback_base_on.lua"))()
 end)
+
+task.spawn(function()
+ 	if game.CreatorId == 5348890 then
+	    wait(60)
+	    if not game.CoreGui:FindFirstChild('NINONOOB') then
+	        game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+	    end
+	end
+end)
+
 if not success then
 	warn("Failed to load remote scripts:", err)
 end
