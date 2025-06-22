@@ -90,10 +90,14 @@ end)
 
 task.spawn(function()
  	if game.CreatorId == 5348890 then
-	    wait(60)
-	    if not game.CoreGui:FindFirstChild('NINONOOB') then
-	        game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
-	    end
+	    repeat task.wait()
+        until game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("LoadingGUI") and game:GetService("Players").LocalPlayer.PlayerGui.LoadingGUI.Enabled == true
+        wait(5)
+        local args = {
+            "EnterTheGame",
+            {}
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Chest"):WaitForChild("Remotes"):WaitForChild("Functions"):WaitForChild("EtcFunction"):InvokeServer(unpack(args))
 	end
 end)
 
