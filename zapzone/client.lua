@@ -23,6 +23,17 @@ local RunService = game:GetService("RunService")
 local Request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) or (getgenv and getgenv().request)
 local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local isDisconnected = false
+local interact = function(path)
+    game:GetService("GuiService").SelectedObject = path
+    task.wait()
+    if game:GetService("GuiService").SelectedObject == path then
+        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+        task.wait()
+    end
+    game:GetService("GuiService").SelectedObject = nil
+    wait(1)
+end
 
 LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started and Nexus.IsConnected then
@@ -113,18 +124,6 @@ task.spawn(function()
         game:GetService("ReplicatedStorage"):WaitForChild("Chest"):WaitForChild("Remotes"):WaitForChild("Functions"):WaitForChild("EtcFunction"):InvokeServer(unpack(args))
 	end
 end)
-
-local interact = function(path)
-    game:GetService("GuiService").SelectedObject = path
-    task.wait()
-    if game:GetService("GuiService").SelectedObject == path then
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-        game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-        task.wait()
-    end
-    game:GetService("GuiService").SelectedObject = nil
-    wait(1)
-end
 
 task.spawn(function()
     while true do task.wait(3)
