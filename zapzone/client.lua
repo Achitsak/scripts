@@ -139,7 +139,7 @@ repeat task.wait()  until game:GetService("Players").LocalPlayer:GetAttribute('D
 		    end
 		end
 	end
-end
+end)
 
 task.spawn(function()
     while true do task.wait(3)
