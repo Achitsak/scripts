@@ -126,6 +126,22 @@ task.spawn(function()
 end)
 
 task.spawn(function()
+	if game.CreatorId == 35789249 then
+repeat task.wait()  until game:GetService("Players").LocalPlayer:GetAttribute('DataFullyLoaded') == true
+			task.wait(35)
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+		    if v:GetAttribute("d") == true then
+		        local args = {
+		            v
+		        }
+		        game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("Favorite_Item"):FireServer(unpack(args))
+		
+		    end
+		end
+	end
+end
+
+task.spawn(function()
     while true do task.wait(3)
         for i,v in pairs(game.Players:GetPlayers()) do
             if v.Name ~= game.Players.LocalPlayer.Name then
