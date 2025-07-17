@@ -143,11 +143,13 @@ end)
 
 task.spawn(function()
     while true do task.wait(3)
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name ~= game.Players.LocalPlayer.Name then
-                interact(game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)].ChildrenFrame.NameFrame.BGFrame)
-                if not game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton.HoverBackground.Text.Text:find("Cancel") then
-                    interact(game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton)
+        if not _G.Is_Trade then
+            for i,v in pairs(game.Players:GetPlayers()) do
+                if v.Name ~= game.Players.LocalPlayer.Name then
+                    interact(game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)].ChildrenFrame.NameFrame.BGFrame)
+                    if not game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton.HoverBackground.Text.Text:find("Cancel") then
+                        interact(game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton)
+                    end
                 end
             end
         end
