@@ -11,6 +11,10 @@ local Request = http_request or request or (syn and syn.request) or (fluxus and 
 local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local isDisconnected = false
 
+local data = {
+	username = LocalPlayer.Name
+}
+
 local interact = function(path)
     game:GetService("GuiService").SelectedObject = path
     task.wait()
@@ -29,10 +33,6 @@ LocalPlayer.OnTeleport:Connect(function(State)
     end
 end)
 
-local data = {
-	username = LocalPlayer.Name
-}
-
 promptOverlay.ChildAdded:Connect(function(child)
 	if child.Name == "ErrorPrompt" then
 	 	pcall(function()
@@ -42,17 +42,6 @@ promptOverlay.ChildAdded:Connect(function(child)
             end
         end)
 	end
-end)
-
-game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v)
-    if v.Name == "ErrorPrompt" then 
-        pcall(function()
-            repeat wait(.5) until game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame:FindFirstChild("ErrorMessage")
-            if tonumber(game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame.ErrorMessage.Text:split("\n")[2]:match("%d+")) ~= 772 and tonumber(game.CoreGui.RobloxPromptGui.promptOverlay.ErrorPrompt.MessageArea.ErrorFrame.ErrorMessage.Text:split("\n")[2]:match("%d+")) ~= 773 then
-                game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-            end
-        end)
-    end
 end)
 
 -- Update status to server
@@ -67,7 +56,6 @@ task.spawn(function()
 					Body = HttpService:JSONEncode(data)
 				}).Body)
 			end)
-
 			if not success then
 				pcall(function()
 					StarterGui:SetCore("SendNotification", {
