@@ -1,18 +1,5 @@
 repeat task.wait() until game:IsLoaded()
-
-if not game:IsLoaded() then
-    task.delay(60, function()
-        if NoShutdown then return end
-        if not game:IsLoaded() then
-            return game:Shutdown()
-        end
-        local Code = game:GetService'GuiService':GetErrorCode().Value
-        if Code >= Enum.ConnectionError.DisconnectErrors.Value then
-            return game:Shutdown()
-        end
-    end)
-    game.Loaded:Wait()
-end
+repeat task.wait() until game.Players.LocalPlayer
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -23,6 +10,7 @@ local RunService = game:GetService("RunService")
 local Request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) or (getgenv and getgenv().request)
 local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local isDisconnected = false
+
 local interact = function(path)
     game:GetService("GuiService").SelectedObject = path
     task.wait()
@@ -67,12 +55,6 @@ game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v)
     end
 end)
 
-promptOverlay.ChildAdded:Connect(function(child)
-    if child.Name == 'ErrorPrompt' then
-        isDisconnected = true
-    end
-end)
-
 -- Update status to server
 task.spawn(function()
 	while true do
@@ -104,41 +86,12 @@ StarterGui:SetCore("SendNotification", {
     Title = "Masterp Services v2.4",
     Text = "Connected: " .. LocalPlayer.Name,
 })
+
 warn("Masterp Client Connected: ")
 
 -- Load remote scripts
 local success, err = pcall(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/scripts/main/ui/v3.lua"))()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Achitsak/Nexus/main/services/callback_base_on.lua"))()
-end)
-
-task.spawn(function()
- 	if game.CreatorId == 5348890 then
-	    repeat task.wait()
-        until game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("LoadingGUI") and game:GetService("Players").LocalPlayer.PlayerGui.LoadingGUI.Enabled == true
-        wait(5)
-        local args = {
-            "EnterTheGame",
-            {}
-        }
-        game:GetService("ReplicatedStorage"):WaitForChild("Chest"):WaitForChild("Remotes"):WaitForChild("Functions"):WaitForChild("EtcFunction"):InvokeServer(unpack(args))
-	end
-end)
-
-task.spawn(function()
-	if game.CreatorId == 35789249 then
-repeat task.wait()  until game:GetService("Players").LocalPlayer:GetAttribute('DataFullyLoaded') == true
-			task.wait(35)
-			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-		    if v:GetAttribute("d") == true then
-		        local args = {
-		            v
-		        }
-		        game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("Favorite_Item"):FireServer(unpack(args))
-		
-		    end
-		end
-	end
 end)
 
 task.spawn(function()
