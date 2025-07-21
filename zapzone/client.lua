@@ -28,7 +28,13 @@ local interact = function(path)
 end
 
 LocalPlayer.OnTeleport:Connect(function(State)
-    if State == Enum.TeleportState.Started and Nexus.IsConnected then
+    if State == Enum.TeleportState.Started then
+        isDisconnected = true
+    end
+end)
+
+Players.LocalPlayer.AncestryChanged:Connect(function()
+    if not Players.LocalPlayer:IsDescendantOf(Players) then
         isDisconnected = true
     end
 end)
