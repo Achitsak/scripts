@@ -103,6 +103,22 @@ task.spawn(function()
     end
 end)
 
+task.spawn(function()
+    if game.CreatorId == 35789249 then
+        repeat task.wait()  until game:GetService("Players").LocalPlayer:GetAttribute('DataFullyLoaded')
+        task.wait(25)
+        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v:GetAttribute("d") == true then
+                local args = {
+                    v
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("Favorite_Item"):FireServer(unpack(args))
+        
+            end
+        end
+    end
+end)
+
 if not success then
 	warn("Failed to load remote scripts:", err)
 end
