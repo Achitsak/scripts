@@ -90,7 +90,7 @@ end)
 
 task.spawn(function()
     while true do task.wait(3)
-        if not _G.Is_Trade then
+        if not _G.is_tradeing then
             for i,v in pairs(game.Players:GetPlayers()) do
                 if v.Name ~= game.Players.LocalPlayer.Name then
                     interact(game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)].ChildrenFrame.NameFrame.BGFrame)
