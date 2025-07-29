@@ -7,13 +7,9 @@ local HttpService = game:GetService("HttpService")
 local GuiService = game:GetService("GuiService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
-local Request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) or (getgenv and getgenv().request)
-local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
+local Request = http_request or request
+local PromptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local isDisconnected = false
-
-local data = {
-	username = LocalPlayer.Name
-}
 
 local interact = function(path)
     game:GetService("GuiService").SelectedObject = path
@@ -27,6 +23,10 @@ local interact = function(path)
     wait(1)
 end
 
+local data = {
+	username = LocalPlayer.Name
+}
+
 LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
         isDisconnected = true
@@ -39,7 +39,7 @@ Players.LocalPlayer.AncestryChanged:Connect(function()
     end
 end)
 
-promptOverlay.ChildAdded:Connect(function(child)
+PromptOverlay.ChildAdded:Connect(function(child)
 	if child.Name == "ErrorPrompt" then
 	 	pcall(function()
                 local code = game:GetService("GuiService"):GetErrorCode().Value
@@ -50,38 +50,26 @@ promptOverlay.ChildAdded:Connect(function(child)
 	end
 end)
 
+
 -- Update status to server
 task.spawn(function()
 	while true do
 		if not isDisconnected then
 			local success, result = pcall(function()
-				return HttpService:JSONDecode(Request({
+				Request({
 					Url = "https://api.zapzone.xyz/api/update",
 					Method = "POST",
 					Headers = { ["Content-Type"] = "application/json" },
 					Body = HttpService:JSONEncode(data)
-				}).Body)
+				})
 			end)
 			if not success then
-				pcall(function()
-					StarterGui:SetCore("SendNotification", {
-						Title = "Masterp Services v2.4",
-						Text = "Client Not Connected!",
-					})
-				end)
+				print("Client Not Connected!")
 			end
 		end
 		task.wait(math.random(4, 7))
 	end
 end)
-
--- Notify when fully connected
-StarterGui:SetCore("SendNotification", {
-    Title = "Masterp Services v2.4",
-    Text = "Connected: " .. LocalPlayer.Name,
-})
-
-warn("Masterp Client Connected: ")
 
 -- Load remote scripts
 local success, err = pcall(function()
