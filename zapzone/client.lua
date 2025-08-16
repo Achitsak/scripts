@@ -108,14 +108,12 @@ task.spawn(function()
 
                         interact(dropdownBtn)
 
-                        -- หา BlockButton แบบไม่ fix path ยาว
                         local dropdown = game:GetService("CoreGui")
                             .PlayerList.Children.OffsetFrame.PlayerScrollList
                             .SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame
 
                         local blockBtn = dropdown:FindFirstChild("BlockButton", true)
                         if blockBtn and blockBtn:IsA("ImageButton") then
-                            -- ถ้า Text ยังเป็น "Block" อยู่ (ไม่ได้ Block แล้ว)
                             local textLabel = blockBtn:FindFirstChildWhichIsA("TextLabel", true)
                             if textLabel and not textLabel.Text:find("Unblock") then
                                 interact(blockBtn)
