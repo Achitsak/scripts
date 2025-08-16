@@ -7,9 +7,11 @@ local HttpService = game:GetService("HttpService")
 local GuiService = game:GetService("GuiService")
 local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
 local Request = http_request or request
 local PromptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local isDisconnected = false
+local modules = {}
 
 local interact = function(path)
     game:GetService("GuiService").SelectedObject = path
