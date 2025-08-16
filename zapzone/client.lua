@@ -77,8 +77,8 @@ local success, err = pcall(function()
 end)
 
 task.spawn(function()
-    while true do task.wait(3)
-        if not game.CreatorId == 1451439645 then
+    while true do task.wait(2)
+        if game.CreatorId ~= 5348890 and game.CreatorId ~= 4372130 then
             if not _G.is_tradeing then
                 for i,v in pairs(game.Players:GetPlayers()) do
                     if v.Name ~= game.Players.LocalPlayer.Name then
@@ -92,6 +92,42 @@ task.spawn(function()
         end
     end
 end)
+
+
+task.spawn(function()
+    while true do task.wait(2)
+        if game.CreatorId ~= 5348890 and game.CreatorId ~= 4372130 then
+            if not _G.is_tradeing then
+                for _, v in pairs(game.Players:GetPlayers()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        local dropdownBtn = game:GetService("CoreGui")
+                            .PlayerList.Children.OffsetFrame.PlayerScrollList
+                            .SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame
+                            .ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)]
+                            .ChildrenFrame.NameFrame.BGFrame
+
+                        interact(dropdownBtn)
+
+                        -- หา BlockButton แบบไม่ fix path ยาว
+                        local dropdown = game:GetService("CoreGui")
+                            .PlayerList.Children.OffsetFrame.PlayerScrollList
+                            .SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame
+
+                        local blockBtn = dropdown:FindFirstChild("BlockButton", true)
+                        if blockBtn and blockBtn:IsA("ImageButton") then
+                            -- ถ้า Text ยังเป็น "Block" อยู่ (ไม่ได้ Block แล้ว)
+                            local textLabel = blockBtn:FindFirstChildWhichIsA("TextLabel", true)
+                            if textLabel and not textLabel.Text:find("Unblock") then
+                                interact(blockBtn)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
 
 task.spawn(function()
     if game.CreatorId == 35789249 then
