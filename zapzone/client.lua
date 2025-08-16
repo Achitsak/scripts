@@ -77,7 +77,7 @@ local success, err = pcall(function()
 end)
 
 task.spawn(function()
-    while true do task.wait(2)
+    while true do task.wait(3)
         if game.CreatorId == 35789249 then
             if not _G.is_tradeing then
                 for i,v in pairs(game.Players:GetPlayers()) do
@@ -95,34 +95,36 @@ end)
 
 
 task.spawn(function()
-    while true do task.wait(2)
-        if game.CreatorId == 5348890 or game.CreatorId == 4372130 then
-            if not _G.is_tradeing then
-                for _, v in pairs(game.Players:GetPlayers()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name then
-                        local dropdownBtn = game:GetService("CoreGui")
-                            .PlayerList.Children.OffsetFrame.PlayerScrollList
-                            .SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame
-                            .ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)]
-                            .ChildrenFrame.NameFrame.BGFrame
+    while true do task.wait(3)
+        pcall(function()
+            if game.CreatorId == 5348890 or game.CreatorId == 4372130 then
+                if not _G.is_tradeing then
+                    for _, v in pairs(game.Players:GetPlayers()) do
+                        if v.Name ~= game.Players.LocalPlayer.Name then
+                            local dropdownBtn = game:GetService("CoreGui")
+                                .PlayerList.Children.OffsetFrame.PlayerScrollList
+                                .SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame
+                                .ScollingFrame.OffsetUndoFrame["p_"..tostring(v.UserId)]
+                                .ChildrenFrame.NameFrame.BGFrame
 
-                        interact(dropdownBtn)
+                            interact(dropdownBtn)
 
-                        local dropdown = game:GetService("CoreGui")
-                            .PlayerList.Children.OffsetFrame.PlayerScrollList
-                            .SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame
+                            local dropdown = game:GetService("CoreGui")
+                                .PlayerList.Children.OffsetFrame.PlayerScrollList
+                                .SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame
 
-                        local blockBtn = dropdown:FindFirstChild("BlockButton", true)
-                        if blockBtn and blockBtn:IsA("ImageButton") then
-                            local textLabel = blockBtn:FindFirstChildWhichIsA("TextLabel", true)
-                            if textLabel and not textLabel.Text:find("Unblock") then
-                                interact(blockBtn)
+                            local blockBtn = dropdown:FindFirstChild("BlockButton", true)
+                            if blockBtn and blockBtn:IsA("ImageButton") then
+                                local textLabel = blockBtn:FindFirstChildWhichIsA("TextLabel", true)
+                                if textLabel and not textLabel.Text:find("Unblock") then
+                                    interact(blockBtn)
+                                end
                             end
                         end
                     end
                 end
             end
-        end
+        end)
     end
 end)
 
