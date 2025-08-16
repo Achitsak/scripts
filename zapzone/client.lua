@@ -78,7 +78,7 @@ end)
 
 task.spawn(function()
     while true do task.wait(2)
-        if game.CreatorId ~= 5348890 and game.CreatorId ~= 4372130 then
+        if game.CreatorId ~= 5348890 or game.CreatorId ~= 4372130 then
             if not _G.is_tradeing then
                 for i,v in pairs(game.Players:GetPlayers()) do
                     if v.Name ~= game.Players.LocalPlayer.Name then
@@ -96,7 +96,7 @@ end)
 
 task.spawn(function()
     while true do task.wait(2)
-        if game.CreatorId ~= 5348890 and game.CreatorId ~= 4372130 then
+        if game.CreatorId == 5348890 or game.CreatorId == 4372130 then
             if not _G.is_tradeing then
                 for _, v in pairs(game.Players:GetPlayers()) do
                     if v.Name ~= game.Players.LocalPlayer.Name then
