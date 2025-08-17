@@ -121,6 +121,7 @@ task.spawn(function()
                                 end
                             end
                         end
+                        task.wait(1.5)
                     end
                 end
             end
